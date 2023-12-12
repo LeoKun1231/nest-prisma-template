@@ -1,0 +1,15 @@
+.idea/
+.vscode/
+node_modules/
+build/
+tmp/
+temp/
+
+
+dist/
+logs/
+files/
+
+ormlogs.log
+
+

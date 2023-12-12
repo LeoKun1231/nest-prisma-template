@@ -1,0 +1,62 @@
+# Use root/example as user/password credentials
+version: "3.8"
+
+services:
+  app:
+    container_name: cms
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development #指定构建阶段
+      args:
+        - APP_ENV
+    command: pnpm start:dev
+    env_file:
+      - .env.development
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - 3000:3000
+    #开发时挂载代码
+    # volumes:
+    #   - .:/usr/src/app
+    depends_on:
+      - mysql
+      - redis
+  mysql:
+    image: mysql
+    container_name: mysql
+    restart: always
+    privileged: true
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      TZ: Asia/Shanghai
+      MYSQL_DATABASE: cms
+    ports:
+      - 3306:3306
+    volumes:
+      # 数据挂载 - Data mounting
+      - /opt/software/mysql/data:/var/lib/mysql
+    command:
+      # 将mysql8.0默认密码策略 修改为 原先 策略 (mysql8.0对其默认策略做了更改 会导致密码无法匹配)
+      # Modify the Mysql 8.0 default password strategy to the original strategy (MySQL8.0 to change its default strategy will cause the password to be unable to match)
+      --default-authentication-plugin=caching_sha2_password
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_general_ci
+      --explicit_defaults_for_timestamp=true
+      --lower_case_table_names=1
+
+  redis:
+    restart: always
+    image: redis
+    hostname: redis
+    container_name: redis
+    privileged: true
+    ports:
+      # 端口映射
+      - 6379:6379
+    volumes:
+      - /opt/software/redis/data:/data:rw
+      - /opt/software/redis/data/redis.conf:/usr/local/etc/redis/redis.conf
+      - /opt/software/redis/data/logs:/logs
+    command: "redis-server /usr/local/etc/redis/redis.conf --requirepass 123456  --appendonly yes"
