@@ -2,13 +2,34 @@
 
 1. nest prisma 模板
 2. 这边推荐使用docker-compose进行环境搭建，如果你是windows,你可能需要使用WSL，如果不使用docker-compose，需要自行安装mysql、redis。
+
    ```bash
    # 如果你有安装docker，且不介意JWT公钥私钥，你只需执行下面的命令即可运行项目。
-   $ docker compose up -d
+   $ pnpm i
+   # 生成prisma类型
+   $ pnpx prisma generate;
+   # 没有安装redis和redis
+   $ sudo docker compose up -d
+   # 有安装redis和redis
+   $ sudo docker compose -f docker-compose.app.yml up -d
    ```
-3. jwt所需要使用的公钥和私钥，需要自行生成，并且在.env.\*文件中配置，如果不想则直接使用默认的即可。
-4. 具体操作步骤，请看后面的安装步骤。
-5. 如果有什么问题，可以在issue中提出，我会尽快回复。
+
+3. 如果不适用docker，你需要先安装mysql和redis,并在env文件中配置好数据库连接信息。
+   ```bash
+   # 如果你没有安装docker，你需要先安装mysql和redis,并在env文件中配置好数据库连接信息。
+   $ pnpm i
+   # 生成prisma类型
+   $ pnpx prisma generate;
+   # 运行项目
+   $ pnpm start:dev
+   ```
+4. 执行完之后需要执行以下命令插入初始数据
+   ```bash
+   $ pnpm seed #将prisma表推送到数据库并把数据插入到数据库中
+   ```
+5. jwt所需要使用的公钥和私钥，需要自行生成，并且在.env.\*文件中配置，如果不想则直接使用默认的即可。
+6. 具体操作步骤，请看后面的安装步骤。
+7. 如果有什么问题，可以在issue中提出，我会尽快回复。
 
 ## 技术栈
 
@@ -95,13 +116,18 @@ $ pnpm start:prod
 
 ### 2.使用docker运行
 
-直接使用docker-compose进行运行即可(推荐)
+1. 直接使用docker-compose进行运行即可(推荐)
 
 ```bash
-docker compose up -d
+$ pnpm i
+$ pnpx prisma generate;
+$ sudo docker compose up -d #没有安装redis和mysql
+$ sudo docker compose -f docker-compose.app.yml up -d #有安装redis和mysql
+$ sudo docker compose -f docker-compose.mysql.yml up -d #单独安装mysql
+$ sudo docker compose -f docker-compose.redis.yml up -d #单独安装redis
 ```
 
-如果不想使用docker-compose，可以使用下面的命令进行运行(这种方法也需要手动安装redis和Mysql)。
+2. 如果不想使用docker-compose，可以使用下面的命令进行运行(这种方法也需要手动安装redis和Mysql)。
 
 ```bash
 
@@ -111,6 +137,6 @@ $ docker build -t my-app .
 $ docker run -p 3000:3000 --volume 'pwd':/usr/src/app  --env-file .env.development my-app
 ```
 
-## prisma操作
+## Prisma操作
 
 具体见<a href="https://www.prisma.io/docs/concepts/components/prisma-client/crud">prisma官网</a>

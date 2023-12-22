@@ -1,6 +1,7 @@
 {
 	"compilerOptions": {
 		"module": "commonjs",
+
 		"declaration": true,
 		"removeComments": true,
 		"emitDecoratorMetadata": true,
@@ -20,6 +21,6 @@
 		"paths": {
 			"@/*": ["./src/*"]
 		},
-		"types": ["./src/@types/index.d.ts"]
+		"types": ["./src/@types/index.d.ts", "node"]
 	}
 }
