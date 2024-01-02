@@ -49,7 +49,7 @@ export class AuthService {
 		// 2.记录用户登录ip
 		this.userService.recordUserIp(user.id, ip);
 
-		const roleId = user.userRole[0].roleId;
+		const roleId = user.userRole[0]?.roleId;
 		//3.生成token
 		const { accessToken, refreshToken } = this.getAccessAndRefreshToken(
 			user.id,
