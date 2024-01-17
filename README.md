@@ -14,9 +14,9 @@
    $ sudo docker compose -f docker-compose.app.yml up -d
    ```
 
-3. 如果不适用docker，你需要先安装mysql和redis,并在env文件中配置好数据库连接信息。
+3. 如果不适用docker，你需要先安装mysql和redis,并在env文件中配置好数据库、redis连接信息。具体为**REDIS**开头的变量和**DATABASE**开头的变量。
    ```bash
-   # 如果你没有安装docker，你需要先安装mysql和redis,并在env文件中配置好数据库连接信息。
+   # 如果你没有安装docker，你需要先安装mysql和redis,并在env文件中配置好数据库、redis连接信息。
    $ pnpm i
    # 生成prisma类型
    $ pnpx prisma generate;
