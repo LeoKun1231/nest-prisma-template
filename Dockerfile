@@ -1,5 +1,4 @@
-#prisma问题 不使用alpine
-FROM node:18 AS development
+FROM node:18-alpine3.16 AS development
 
 #指定工作目录
 WORKDIR /usr/src/app
@@ -10,15 +9,11 @@ COPY pnpm-lock.yaml ./
 COPY prisma ./prisma
 
 RUN npm config set registry https://registry.npmmirror.com/
-
 RUN npm install -g pnpm
-
 RUN pnpm install 
-
 RUN pnpx prisma generate
 
 COPY . .
-
 #设置默认环境变量
 ARG APP_ENV=development
 #暴露环境变量
@@ -27,25 +22,27 @@ ENV NODE_ENV=${APP_ENV}
 RUN pnpm build
 
 
-FROM node:18  AS production
+FROM node:18-alpine3.16 AS production
 
 
 ARG APP_ENV=development
 ENV NODE_ENV=${APP_ENV}
 
 #指定工作目录
-WORKDIR /usr/src/app
 
+WORKDIR /usr/src/app
 
 RUN npm install -g pnpm
 
-COPY --from=builder /usr/src/app/node_modules ./node_modules
-COPY --from=builder /usr/src/app/package.json ./
-COPY --from=builder /usr/src/app/pnpm-lock.yaml ./
-COPY --from=builder /usr/src/app/dist ./dist
+COPY --from=development /usr/src/app/package.json  ./
+COPY --from=development /usr/src/app/pnpm-lock.yaml  ./
+COPY --from=development /usr/src/app/dist  ./dist
+COPY --from=development /usr/src/app/prisma ./prisma
 
+RUN pnpx prisma generate
+
+RUN pnpm install --production
 
 EXPOSE 3000
-
 
 CMD ["node", "dist/main"]

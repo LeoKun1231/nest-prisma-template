@@ -16,11 +16,11 @@
 		"test:cov": "jest --coverage",
 		"test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
 		"test:e2e": "jest --config ./test/jest-e2e.json",
-		"prepare": "husky install",
 		"fix": "eslint . --ext .js,.ts,--fix --ignore-path .gitignore",
 		"commit": "git add . && git-cz",
 		"reset": "prisma migrate reset",
-		"seed": "prisma db push && ts-node ./src/seed.ts"
+		"seed": "prisma db push && ts-node ./src/seed.ts",
+		"prepare": "husky install"
 	},
 	"dependencies": {
 		"@nestjs/common": "^10.0.0",
@@ -32,14 +32,13 @@
 		"@nestjs/platform-express": "^10.0.0",
 		"@nestjs/swagger": "^7.1.13",
 		"@nestjs/throttler": "^5.0.1",
-		"@nestjs/typeorm": "^10.0.0",
 		"@prisma/client": "5.6.0",
+		"@nestjs/typeorm": "^10.0.0",
 		"bcryptjs": "^2.4.3",
 		"class-transformer": "^0.5.1",
 		"class-validator": "^0.14.0",
 		"cross-env": "^7.0.3",
 		"dayjs": "^1.11.10",
-		"dompurify": "^3.0.6",
 		"dotenv": "^16.3.1",
 		"helmet": "^7.1.0",
 		"ioredis": "^5.3.2",
@@ -51,7 +50,6 @@
 		"passport": "^0.6.0",
 		"passport-jwt": "^4.0.1",
 		"passport-local": "^1.0.0",
-		"pg": "^8.4.0",
 		"qrcode": "^1.5.3",
 		"reflect-metadata": "^0.1.13",
 		"request-ip": "^3.3.0",
@@ -59,7 +57,8 @@
 		"swagger-ui-express": "^5.0.0",
 		"uuid": "^9.0.1",
 		"winston": "^3.11.0",
-		"winston-daily-rotate-file": "^4.7.1"
+		"winston-daily-rotate-file": "^4.7.1",
+		"husky": "^8.0.0"
 	},
 	"devDependencies": {
 		"@nestjs/cli": "^10.0.0",
@@ -87,7 +86,6 @@
 		"eslint": "^8.42.0",
 		"eslint-config-prettier": "^9.0.0",
 		"eslint-plugin-prettier": "^5.0.0",
-		"husky": "^8.0.0",
 		"jest": "^29.5.0",
 		"lint-staged": "^15.0.2",
 		"pnpm": "^8.10.2",
