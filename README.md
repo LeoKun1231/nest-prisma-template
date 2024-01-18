@@ -3,6 +3,7 @@
 1. nest prisma 模板
 2. 这边推荐使用docker-compose进行环境搭建，如果你是windows,你可能需要使用WSL，如果不使用docker-compose，需要自行安装mysql、redis。
 3. 如果你有安装docker且不介意JWT公钥私钥，你只需执行下面的命令即可运行项目。值得注意的是，默认docker启动在开发模式，如果要切换到生产模式，请修改docker-compose.yml。
+
    3.1 生产环境下的启动命令
 
    ```bash
@@ -30,7 +31,7 @@
    $ sudo docker compose -f docker-compose.app.dev.yml up -d
    ```
 
-4. 如果不适用docker，你需要先安装mysql和redis,并在env文件中配置好数据库、redis连接信息。具体为**REDIS**开头的变量和**DATABASE**开头的变量。
+5. 如果不适用docker，你需要先安装mysql和redis,并在env文件中配置好数据库、redis连接信息。具体为**REDIS**开头的变量和**DATABASE**开头的变量。
 
    ```bash
    # 如果你没有安装docker，你需要先安装mysql和redis,并在env文件中配置好数据库、redis连接信息。
@@ -41,15 +42,15 @@
    $ pnpm start:dev
    ```
 
-5. 执行完之后需要执行以下命令插入初始数据
+6. 执行完之后需要执行以下命令插入初始数据
 
    ```bash
    $ pnpm seed #将prisma表推送到数据库并把数据插入到数据库中
    ```
 
-6. jwt所需要使用的公钥和私钥，需要自行生成，并且在.env.\*文件中配置，如果不想则直接使用默认的即可。
-7. 具体操作步骤，请看后面的安装步骤。
-8. 如果有什么问题，可以在issue中提出，我会尽快回复。
+7. jwt所需要使用的公钥和私钥，需要自行生成，并且在.env.\*文件中配置，如果不想则直接使用默认的即可。
+8. 具体操作步骤，请看后面的安装步骤。
+9. 如果有什么问题，可以在issue中提出，我会尽快回复。
 
 ## 技术栈
 
