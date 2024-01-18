@@ -7,13 +7,12 @@ services:
     restart: always
     build:
       context: .
-      dockerfile: Dockerfile
-      target: development #指定构建阶段
+      dockerfile: Dockerfile.prod
+      target: production #指定构建阶段
       args:
         - APP_ENV
-    command: pnpm start:dev
     env_file:
-      - .env.development
+      - .env.production
     environment:
       - TZ=Asia/Shanghai
     ports:

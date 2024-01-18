@@ -39,9 +39,8 @@ COPY --from=development /usr/src/app/pnpm-lock.yaml  ./
 COPY --from=development /usr/src/app/dist  ./dist
 COPY --from=development /usr/src/app/prisma ./prisma
 
-RUN pnpx prisma generate
-
 RUN pnpm install --production
+RUN pnpx prisma generate
 
 EXPOSE 3000
 

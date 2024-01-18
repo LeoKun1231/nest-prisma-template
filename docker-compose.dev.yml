@@ -7,12 +7,10 @@ services:
     restart: always
     build:
       context: .
-      dockerfile: Dockerfile
-      #开发时切换为development、生产时切换为production
+      dockerfile: Dockerfile.dev
       target: development #指定构建阶段
       args:
         - APP_ENV
-    # 开发时打开
     command: pnpm start:dev
     env_file:
       - .env.development
