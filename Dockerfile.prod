@@ -39,6 +39,8 @@ COPY --from=development /usr/src/app/pnpm-lock.yaml  ./
 COPY --from=development /usr/src/app/dist  ./dist
 COPY --from=development /usr/src/app/prisma ./prisma
 
+RUN npm config set registry https://registry.npmmirror.com/
+
 RUN pnpm install --production
 RUN pnpx prisma generate
 
