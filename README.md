@@ -86,6 +86,8 @@ JWT_PRIVATE_KEY_BASE64=这里填入经过base64编码的私钥
     pnpm i
     # 生成prisma类型
     pnpx prisma generate
+    #推送数据到数据库
+    pnpm seed
     #运行项目
     pnpm start:dev
     ```
@@ -100,6 +102,8 @@ JWT_PRIVATE_KEY_BASE64=这里填入经过base64编码的私钥
     $ pnpx prisma generate;
     # 本机没有安装mysql和redis的情况下(仅第一次运行使用，创建mysql,redis以及app容器)
     $ sudo docker-compose -f docker-compose.prod.yml up
+    # 推送数据到数据库(仅第一次运行使用)
+    $ pnpm seed
     # 本机有安装mysql和redis的情况下(第二次以及往后请执行这个)
     $ sudo docker compose -f docker-compose.app.prod.yml up
     ```
@@ -115,6 +119,8 @@ JWT_PRIVATE_KEY_BASE64=这里填入经过base64编码的私钥
     $ pnpm build
     # 本机没有安装mysql和redis的情况下(仅第一次运行使用，创建mysql,redis以及app容器)
     $ sudo docker-compose -f docker-compose.dev.yml up
+    # 推送数据到数据库(仅第一次运行使用)
+    $ pnpm seed
     # 本机有安装mysql和redis的情况下(第二次以及往后请执行这个)
     $ sudo docker compose -f docker-compose.app.dev.yml up
 
